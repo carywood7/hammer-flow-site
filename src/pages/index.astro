@@ -5,7 +5,12 @@ import ProblemCard from "../components/ProblemCard.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SystemDiagram from "../components/SystemDiagram.astro";
+import WorkflowRow from "../components/WorkflowRow.astro";
 import { operationalProblems, services } from "../data/company";
+import {
+  referenceWorkflows,
+  workflowControls,
+} from "../data/workflows";
 
 const proofPoints = [
   "5 validated reference workflows",
@@ -155,19 +160,62 @@ const proofPoints = [
       </div>
     </section>
 
-    <section id="workflows" class="foundation-section section">
-      <div class="container container--narrow">
-        <p class="eyebrow">Validated reference systems</p>
+    <section id="workflows" class="workflow-showcase section">
+      <div class="container">
+        <div class="workflow-showcase__intro">
+          <div>
+            <p class="eyebrow">Validated workflow examples</p>
 
-        <h2 class="section-title">
-          Five workflows designed around real MSP operating pressure.
-        </h2>
+            <h2 class="section-title">
+              Five separate systems. One controlled delivery standard.
+            </h2>
+          </div>
 
-        <p class="section-copy">
-          The next build stage will present each validated workflow through its
-          business problem, deterministic decision logic, human-review control,
-          and operational output.
-        </p>
+          <div class="workflow-showcase__positioning">
+            <p>
+              These are public-safe local reference implementations—not
+              packaged SaaS modules. Each demonstrates how Hammer Flow turns an
+              MSP operating problem into deterministic logic, a reviewable
+              output, and a safer production implementation plan.
+            </p>
+
+            <small>
+              Current reference state: synthetic data, inactive sanitized
+              exports, local delivery, and no production write access.
+            </small>
+          </div>
+        </div>
+
+        <div
+          class="workflow-showcase__controls"
+          aria-label="Reference workflow controls"
+        >
+          {
+            workflowControls.map((control, index) => (
+              <div>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{control}</strong>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="workflow-showcase__list">
+          {
+            referenceWorkflows.map((workflow) => (
+              <WorkflowRow
+                id={workflow.id}
+                category={workflow.category}
+                title={workflow.title}
+                purpose={workflow.purpose}
+                logic={workflow.logic}
+                proof={workflow.proof}
+                outcome={workflow.outcome}
+                control={workflow.control}
+              />
+            ))
+          }
+        </div>
       </div>
     </section>
 
@@ -384,11 +432,87 @@ const proofPoints = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .foundation-section {
-    min-height: 29rem;
-    display: grid;
-    align-items: center;
+  .workflow-showcase {
     border-top: var(--border-subtle);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(116, 168, 200, 0.025),
+        transparent 24rem
+      );
+  }
+
+  .workflow-showcase__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(21rem, 0.72fr);
+    align-items: end;
+    gap: var(--space-8);
+    margin-bottom: var(--space-7);
+  }
+
+  .workflow-showcase__intro .section-title {
+    max-width: 17ch;
+    margin-bottom: 0;
+  }
+
+  .workflow-showcase__positioning {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .workflow-showcase__positioning p {
+    margin: 0;
+    color: var(--color-steel-300);
+    font-size: 0.94rem;
+    line-height: 1.68;
+  }
+
+  .workflow-showcase__positioning small {
+    padding-top: 0.85rem;
+    border-top: var(--border-subtle);
+    color: var(--color-steel-500);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.055em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+  .workflow-showcase__controls {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-bottom: var(--space-6);
+    border-block: var(--border-subtle);
+  }
+
+  .workflow-showcase__controls div {
+    display: grid;
+    min-height: 5.5rem;
+    align-content: center;
+    gap: 0.38rem;
+    padding: 1rem;
+    border-right: var(--border-subtle);
+  }
+
+  .workflow-showcase__controls div:first-child {
+    border-left: var(--border-subtle);
+  }
+
+  .workflow-showcase__controls span {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+
+  .workflow-showcase__controls strong {
+    color: var(--color-paper-200);
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .workflow-showcase__list {
+    border-inline: var(--border-subtle);
   }
 
   .audit-foundation {
@@ -433,9 +557,18 @@ const proofPoints = [
     }
 
     .problems__intro,
-    .services-section__intro {
+    .services-section__intro,
+    .workflow-showcase__intro {
       grid-template-columns: 1fr;
       align-items: start;
+    }
+
+    .workflow-showcase__controls {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .workflow-showcase__controls div:nth-child(n + 4) {
+      border-top: var(--border-subtle);
     }
 
     .services-section__grid {
@@ -470,8 +603,18 @@ const proofPoints = [
     }
 
     .problems__grid,
-    .services-section__grid {
+    .services-section__grid,
+    .workflow-showcase__controls {
       grid-template-columns: 1fr;
+    }
+
+    .workflow-showcase__controls div,
+    .workflow-showcase__controls div:first-child {
+      border-inline: var(--border-subtle);
+    }
+
+    .workflow-showcase__controls div + div {
+      border-top: var(--border-subtle);
     }
 
     .problems__intro {

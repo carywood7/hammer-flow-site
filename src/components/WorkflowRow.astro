@@ -1,0 +1,234 @@
+---
+interface Props {
+  id: string;
+  category: string;
+  title: string;
+  purpose: string;
+  logic: readonly string[];
+  proof: string;
+  outcome: string;
+  control: string;
+}
+
+const {
+  id,
+  category,
+  title,
+  purpose,
+  logic,
+  proof,
+  outcome,
+  control,
+} = Astro.props;
+---
+
+<article class="workflow-row">
+  <header class="workflow-row__identity">
+    <div>
+      <span>{id}</span>
+      <small>{category}</small>
+    </div>
+
+    <h3>{title}</h3>
+  </header>
+
+  <div class="workflow-row__purpose">
+    <p>{purpose}</p>
+
+    <ul aria-label={`${id} deterministic logic`}>
+      {logic.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+
+  <div class="workflow-row__evidence">
+    <span>Validated synthetic sample</span>
+    <strong>{proof}</strong>
+  </div>
+
+  <footer class="workflow-row__delivery">
+    <div>
+      <span>Operational output</span>
+      <strong>{outcome}</strong>
+    </div>
+
+    <small>{control}</small>
+  </footer>
+</article>
+
+<style>
+  .workflow-row {
+    display: grid;
+    min-height: 11.75rem;
+    grid-template-columns:
+      minmax(12.5rem, 0.9fr)
+      minmax(18rem, 1.35fr)
+      minmax(14rem, 1fr)
+      minmax(11rem, 0.75fr);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+    align-items: start;
+    padding: clamp(1.4rem, 2.5vw, 1.9rem);
+    border-bottom: var(--border-subtle);
+    transition:
+      background-color var(--transition-medium),
+      border-color var(--transition-medium);
+  }
+
+  .workflow-row:first-child {
+    border-top: var(--border-subtle);
+  }
+
+  .workflow-row:hover {
+    border-color: rgba(216, 217, 212, 0.2);
+    background: rgba(116, 168, 200, 0.035);
+  }
+
+  .workflow-row__identity {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .workflow-row__identity > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .workflow-row__identity span,
+  .workflow-row__identity small,
+  .workflow-row__evidence span,
+  .workflow-row__delivery span,
+  .workflow-row__delivery small {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .workflow-row__identity span {
+    color: var(--color-signal-300);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row__identity small {
+    color: var(--color-steel-500);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .workflow-row__purpose {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .workflow-row__purpose p {
+    margin: 0;
+    color: var(--color-steel-300);
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
+  .workflow-row__purpose ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .workflow-row__purpose li {
+    padding: 0.34rem 0.48rem;
+    border: 1px solid rgba(216, 217, 212, 0.1);
+    border-radius: var(--radius-small);
+    color: var(--color-steel-400);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    line-height: 1.35;
+  }
+
+  .workflow-row__evidence,
+  .workflow-row__delivery {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .workflow-row__evidence span,
+  .workflow-row__delivery span {
+    color: var(--color-steel-500);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row__evidence strong {
+    color: var(--color-paper-200);
+    font-size: 0.83rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .workflow-row__delivery {
+    height: 100%;
+    align-content: space-between;
+  }
+
+  .workflow-row__delivery > div {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .workflow-row__delivery strong {
+    color: var(--color-paper-100);
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .workflow-row__delivery small {
+    padding-top: 0.7rem;
+    border-top: var(--border-subtle);
+    color: var(--color-success-400);
+    font-size: 0.54rem;
+    letter-spacing: 0.065em;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 68rem) {
+    .workflow-row {
+      grid-template-columns: minmax(12rem, 0.8fr) minmax(18rem, 1.2fr);
+    }
+
+    .workflow-row__evidence,
+    .workflow-row__delivery {
+      padding-top: 1rem;
+      border-top: var(--border-subtle);
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .workflow-row {
+      min-height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-row__evidence,
+    .workflow-row__delivery {
+      padding-top: 1rem;
+    }
+
+    .workflow-row h3 {
+      max-width: 22ch;
+    }
+  }
+</style>
