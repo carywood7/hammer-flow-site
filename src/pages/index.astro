@@ -1,0 +1,83 @@
+---
+const pageTitle = "Hammer Flow | MSP Automation Services";
+const pageDescription =
+  "Hammer Flow designs, implements, integrates, and manages workflow automation for managed service providers.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={pageDescription} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+
+  <body>
+    <main>
+      <p class="eyebrow">Hammer Flow</p>
+
+      <h1>MSP automation website foundation</h1>
+
+      <p class="intro">
+        The technical foundation is ready. The complete service-led Hammer Flow
+        website will be developed through the next design and content sprints.
+      </p>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    color-scheme: dark;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    background: #101417;
+    color: #f4f1e9;
+  }
+
+  :global(body) {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  main {
+    width: min(42rem, calc(100% - 3rem));
+    padding: 4rem 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e6a447;
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(2.75rem, 8vw, 5.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+  }
+
+  .intro {
+    max-width: 37rem;
+    margin: 1.75rem 0 0;
+    color: #aeb7bd;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+</style>
