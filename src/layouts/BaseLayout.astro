@@ -23,6 +23,15 @@ const {
   description = site.description,
   robots = "index,follow",
 } = Astro.props;
+
+const canonicalURL = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : undefined;
+
+const effectiveRobots =
+  site.reviewMode && robots === "index,follow"
+    ? "noindex,nofollow"
+    : robots;
 ---
 
 <!doctype html>
@@ -30,8 +39,14 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="robots" content={robots} />
+    <meta name="robots" content={effectiveRobots} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+      canonicalURL && (
+        <link rel="canonical" href={canonicalURL.toString()} />
+      )
+    }
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#090d10" />
 
@@ -39,6 +54,14 @@ const {
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    {
+      canonicalURL && (
+        <meta
+          property="og:url"
+          content={canonicalURL.toString()}
+        />
+      )
+    }
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />

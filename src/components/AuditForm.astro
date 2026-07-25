@@ -1,11 +1,34 @@
+---
+import { site } from "../data/site";
+
+const reviewMode = site.reviewMode;
+---
+
 <form
   class="audit-form"
   name="automation-audit"
-  method="POST"
-  action="/thank-you/"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
+  method={reviewMode ? undefined : "POST"}
+  action={reviewMode ? undefined : "/thank-you/"}
+  data-netlify={reviewMode ? undefined : "true"}
+  netlify-honeypot={reviewMode ? undefined : "bot-field"}
+  data-review-mode={reviewMode ? "true" : undefined}
+  aria-describedby={
+    reviewMode ? "audit-preview-notice" : undefined
+  }
+  onsubmit={reviewMode ? "return false;" : undefined}
 >
+  {
+    reviewMode && (
+      <p
+        class="audit-form__preview-note"
+        id="audit-preview-notice"
+        role="status"
+      >
+        Preview deployment — audit submissions are paused
+        until the final hosting and delivery address are approved.
+      </p>
+    )
+  }
   <input type="hidden" name="form-name" value="automation-audit" />
 
   <p class="audit-form__honeypot">
@@ -107,8 +130,21 @@
   </label>
 
   <div class="audit-form__submit">
-    <button type="submit">
-      Request an Automation Audit
+    <button
+      type="submit"
+      disabled={reviewMode}
+      aria-disabled={reviewMode ? "true" : undefined}
+      title={
+        reviewMode
+          ? "Submissions are paused during preview review."
+          : undefined
+      }
+    >
+      {
+        reviewMode
+          ? "Submissions Enabled After Approval"
+          : "Request an Automation Audit"
+      }
       <span aria-hidden="true">→</span>
     </button>
 
@@ -119,6 +155,18 @@
 </form>
 
 <style>
+  .audit-form__preview-note {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(166, 103, 29, 0.32);
+    background: rgba(240, 177, 76, 0.08);
+    color: #53616a;
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    letter-spacing: 0.025em;
+    line-height: 1.55;
+  }
+
   .audit-form {
     display: grid;
     gap: 1.2rem;
@@ -259,6 +307,20 @@
   .audit-form__submit button:focus-visible {
     outline: 3px solid rgba(166, 103, 29, 0.26);
     outline-offset: 3px;
+  }
+
+  .audit-form__submit button:disabled {
+    border-color: rgba(9, 13, 16, 0.2);
+    background: #d7d4ca;
+    color: #53616a;
+    cursor: not-allowed;
+    opacity: 0.82;
+    transform: none;
+  }
+
+  .audit-form__submit button:disabled:hover {
+    background: #d7d4ca;
+    transform: none;
   }
 
   .audit-form__submit p {

@@ -4,11 +4,13 @@ export const site = {
   title: "Hammer Flow | MSP Automation Services",
   description:
     "Hammer Flow audits, designs, implements, integrates, and manages workflow automation for managed service providers.",
+  url: "https://hammerflow.carywood.co",
+  reviewMode: true,
   navigation: [
-    { label: "Services", href: "#services" },
-    { label: "Workflow Examples", href: "#workflows" },
-    { label: "Approach", href: "#approach" },
-    { label: "Integrations", href: "#integrations" },
-    { label: "Why Hammer Flow", href: "#why-hammer-flow" },
+    { label: "Services", href: "/#services" },
+    { label: "Workflow Examples", href: "/#workflows" },
+    { label: "Approach", href: "/#approach" },
+    { label: "Integrations", href: "/#integrations" },
+    { label: "Why Hammer Flow", href: "/#why-hammer-flow" },
   ],
 } as const;
