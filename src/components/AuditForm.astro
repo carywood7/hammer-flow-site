@@ -1,0 +1,286 @@
+<form
+  class="audit-form"
+  name="automation-audit"
+  method="POST"
+  action="/thank-you/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value="automation-audit" />
+
+  <p class="audit-form__honeypot">
+    <label>
+      Do not complete this field:
+      <input name="bot-field" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
+
+  <div class="audit-form__grid">
+    <label>
+      <span>Your name</span>
+
+      <input
+        type="text"
+        name="full-name"
+        autocomplete="name"
+        required
+      />
+    </label>
+
+    <label>
+      <span>Work email</span>
+
+      <input
+        type="email"
+        name="work-email"
+        autocomplete="email"
+        inputmode="email"
+        required
+      />
+    </label>
+
+    <label>
+      <span>MSP or company</span>
+
+      <input
+        type="text"
+        name="company"
+        autocomplete="organization"
+        required
+      />
+    </label>
+
+    <label>
+      <span>Current systems</span>
+
+      <input
+        type="text"
+        name="current-systems"
+        placeholder="PSA, RMM, Microsoft 365, workflow tools"
+      />
+    </label>
+  </div>
+
+  <label class="audit-form__full">
+    <span>Which workflow needs to work better?</span>
+
+    <textarea
+      name="workflow"
+      rows="5"
+      placeholder="Describe the repeated work, handoffs, delays, service risk, or manual process."
+      required
+    ></textarea>
+  </label>
+
+  <div class="audit-form__grid">
+    <label>
+      <span>Current priority</span>
+
+      <select name="priority" required>
+        <option value="" selected disabled>Select one</option>
+        <option value="exploring">Exploring opportunities</option>
+        <option value="planned">Planned initiative</option>
+        <option value="active-problem">Active operational problem</option>
+        <option value="urgent">Urgent service risk</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Preferred first step</span>
+
+      <select name="preferred-first-step" required>
+        <option value="" selected disabled>Select one</option>
+        <option value="workflow-audit">Workflow audit</option>
+        <option value="discovery-conversation">Discovery conversation</option>
+        <option value="implementation-review">Implementation review</option>
+        <option value="managed-automation">Managed automation discussion</option>
+      </select>
+    </label>
+  </div>
+
+  <label class="audit-form__consent">
+    <input type="checkbox" name="contact-consent" required />
+
+    <span>
+      I agree to be contacted about this Hammer Flow automation request.
+    </span>
+  </label>
+
+  <div class="audit-form__submit">
+    <button type="submit">
+      Request an Automation Audit
+      <span aria-hidden="true">→</span>
+    </button>
+
+    <p>
+      Submitted information is used only to review and respond to this request.
+    </p>
+  </div>
+</form>
+
+<style>
+  .audit-form {
+    display: grid;
+    gap: 1.2rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    border: 1px solid rgba(9, 13, 16, 0.16);
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .audit-form__honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .audit-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .audit-form label {
+    display: grid;
+    gap: 0.48rem;
+  }
+
+  .audit-form label > span {
+    color: #28343b;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .audit-form input,
+  .audit-form select,
+  .audit-form textarea {
+    width: 100%;
+    border: 1px solid rgba(9, 13, 16, 0.17);
+    border-radius: 0;
+    outline: none;
+    background: rgba(255, 255, 255, 0.58);
+    color: var(--color-ink-950);
+    font: inherit;
+    font-size: 0.88rem;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .audit-form input,
+  .audit-form select {
+    min-height: 3rem;
+    padding: 0.72rem 0.78rem;
+  }
+
+  .audit-form textarea {
+    min-height: 8.75rem;
+    resize: vertical;
+    padding: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .audit-form input:focus,
+  .audit-form select:focus,
+  .audit-form textarea:focus {
+    border-color: #a6671d;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(166, 103, 29, 0.12);
+  }
+
+  .audit-form input::placeholder,
+  .audit-form textarea::placeholder {
+    color: #7c878d;
+  }
+
+  .audit-form__consent {
+    display: flex !important;
+    grid-template-columns: none;
+    align-items: flex-start;
+    gap: 0.7rem !important;
+  }
+
+  .audit-form__consent input {
+    width: 1rem;
+    min-height: auto;
+    margin-top: 0.16rem;
+    accent-color: #a6671d;
+  }
+
+  .audit-form__consent span {
+    color: #53616a !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.76rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.5;
+    text-transform: none !important;
+  }
+
+  .audit-form__submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(9, 13, 16, 0.13);
+  }
+
+  .audit-form__submit button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.78rem 1rem;
+    border: 1px solid #a6671d;
+    background: var(--color-signal-300);
+    color: var(--color-ink-950);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition:
+      transform var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .audit-form__submit button:hover {
+    transform: translateY(-2px);
+    background: #efb65e;
+  }
+
+  .audit-form__submit button:focus-visible {
+    outline: 3px solid rgba(166, 103, 29, 0.26);
+    outline-offset: 3px;
+  }
+
+  .audit-form__submit p {
+    max-width: 17rem;
+    margin: 0;
+    color: #68757c;
+    font-size: 0.68rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 42rem) {
+    .audit-form__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .audit-form__submit {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .audit-form__submit button {
+      width: 100%;
+    }
+  }
+</style>

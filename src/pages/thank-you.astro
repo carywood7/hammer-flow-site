@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BrandMark from "../components/BrandMark.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout
+  title="Request received | Hammer Flow"
+  description="Your Hammer Flow automation audit request has been received."
+  robots="noindex,nofollow"
+>
+  <main id="main-content" class="thank-you">
+    <div class="container thank-you__inner">
+      <BrandMark />
+
+      <div class="thank-you__content">
+        <p class="eyebrow">Request received</p>
+
+        <h1>Thank you. Your workflow request is ready for review.</h1>
+
+        <p>
+          Hammer Flow will review the operating problem, current systems, and
+          requested first step. Follow-up will use the work email submitted with
+          the request.
+        </p>
+
+        <ButtonLink
+          href="/"
+          label="Return to Hammer Flow"
+          variant="secondary"
+        />
+      </div>
+
+      <div class="thank-you__standard" aria-label="Hammer Flow review standard">
+        <div>
+          <span>01</span>
+          <strong>Operating problem reviewed first</strong>
+        </div>
+
+        <div>
+          <span>02</span>
+          <strong>Existing systems remain central</strong>
+        </div>
+
+        <div>
+          <span>03</span>
+          <strong>No production access assumed</strong>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .thank-you {
+    min-height: 73vh;
+    display: grid;
+    align-items: center;
+    padding-block: clamp(2.5rem, 6vw, 5.5rem);
+  }
+
+  .thank-you__inner {
+    display: grid;
+    gap: clamp(3rem, 7vw, 6rem);
+  }
+
+  .thank-you__content {
+    max-width: 52rem;
+  }
+
+  .thank-you h1 {
+    max-width: 15ch;
+    margin-bottom: var(--space-5);
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.8vw, 5.1rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .thank-you__content > p:not(.eyebrow) {
+    max-width: 43rem;
+    margin-bottom: var(--space-6);
+    color: var(--color-steel-300);
+    font-size: clamp(1rem, 1.6vw, 1.14rem);
+    line-height: 1.7;
+  }
+
+  .thank-you__standard {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block: var(--border-subtle);
+  }
+
+  .thank-you__standard div {
+    display: grid;
+    min-height: 6rem;
+    align-content: center;
+    gap: 0.45rem;
+    padding: 1rem;
+    border-right: var(--border-subtle);
+  }
+
+  .thank-you__standard div:first-child {
+    border-left: var(--border-subtle);
+  }
+
+  .thank-you__standard span {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+  }
+
+  .thank-you__standard strong {
+    color: var(--color-paper-200);
+    font-size: 0.73rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 48rem) {
+    .thank-you__standard {
+      grid-template-columns: 1fr;
+    }
+
+    .thank-you__standard div,
+    .thank-you__standard div:first-child {
+      border-inline: var(--border-subtle);
+    }
+
+    .thank-you__standard div + div {
+      border-top: var(--border-subtle);
+    }
+  }
+</style>

@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import AuditForm from "../components/AuditForm.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import DeliveryStage from "../components/DeliveryStage.astro";
 import IntegrationCard from "../components/IntegrationCard.astro";
 import ProblemCard from "../components/ProblemCard.astro";
 import ServiceCard from "../components/ServiceCard.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SystemDiagram from "../components/SystemDiagram.astro";
 import WorkflowRow from "../components/WorkflowRow.astro";
@@ -32,7 +34,7 @@ const proofPoints = [
 <BaseLayout>
   <SiteHeader />
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__content">
@@ -345,21 +347,47 @@ const proofPoints = [
       </div>
     </section>
 
-    <section id="audit" class="audit-foundation">
-      <div class="container audit-foundation__inner">
-        <div>
-          <p class="eyebrow">Audit-first delivery</p>
+    <section id="audit" class="audit-section section">
+      <div class="container audit-section__grid">
+        <div class="audit-section__intro">
+          <p class="eyebrow">Automation audit</p>
 
           <h2>Start with one workflow that needs to work better.</h2>
+
+          <p>
+            Describe the repeated work, service risk, handoffs, or disconnected
+            systems. Hammer Flow will review the operating problem before
+            recommending tools, access, or implementation.
+          </p>
+
+          <div class="audit-section__next">
+            <p>What the first review covers</p>
+
+            <ol>
+              <li>
+                <span>01</span>
+                <strong>Operating problem and desired outcome</strong>
+              </li>
+
+              <li>
+                <span>02</span>
+                <strong>Current systems, owners, and handoffs</strong>
+              </li>
+
+              <li>
+                <span>03</span>
+                <strong>Risk, permissions, and review boundaries</strong>
+              </li>
+            </ol>
+          </div>
         </div>
 
-        <p>
-          The final audit section and contact path will be implemented after the
-          complete page architecture and public contact details are confirmed.
-        </p>
+        <AuditForm />
       </div>
     </section>
   </main>
+
+  <SiteFooter />
 </BaseLayout>
 
 <style>
@@ -824,40 +852,82 @@ const proofPoints = [
     line-height: 1.62;
   }
 
-  .audit-foundation {
-    padding-block: var(--space-9);
+  .audit-section {
     border-top: var(--border-subtle);
     background: var(--color-paper-100);
     color: var(--color-ink-950);
   }
 
-  .audit-foundation__inner {
+  .audit-section__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
-    align-items: end;
-    gap: var(--space-8);
+    grid-template-columns: minmax(20rem, 0.82fr) minmax(28rem, 1.18fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
   }
 
-  .audit-foundation :global(.eyebrow) {
+  .audit-section :global(.eyebrow) {
     color: #9b5f17;
   }
 
-  .audit-foundation h2 {
+  .audit-section__intro h2 {
     max-width: 14ch;
-    margin: 0;
+    margin-bottom: var(--space-5);
     color: var(--color-ink-950);
     font-family: var(--font-display);
-    font-size: clamp(2.15rem, 3.6vw, 3.45rem);
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
     font-weight: 600;
-    letter-spacing: -0.045em;
-    line-height: 1.03;
+    letter-spacing: -0.05em;
+    line-height: 1;
   }
 
-  .audit-foundation p:last-child {
-    max-width: 31rem;
+  .audit-section__intro > p:not(.eyebrow) {
+    max-width: 35rem;
+    margin-bottom: var(--space-7);
+    color: #53616a;
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+
+  .audit-section__next {
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(9, 13, 16, 0.14);
+  }
+
+  .audit-section__next > p {
+    margin-bottom: 0.8rem;
+    color: #7a858b;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .audit-section__next ol {
+    display: grid;
     margin: 0;
-    color: #4e5c64;
-    line-height: 1.75;
+    padding: 0;
+    list-style: none;
+  }
+
+  .audit-section__next li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding-block: 0.85rem;
+    border-top: 1px solid rgba(9, 13, 16, 0.1);
+  }
+
+  .audit-section__next li span {
+    color: #9b5f17;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+
+  .audit-section__next li strong {
+    color: #29343a;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.45;
   }
 
   @media (max-width: 66rem) {
@@ -983,7 +1053,7 @@ const proofPoints = [
       border-top: var(--border-subtle);
     }
 
-    .audit-foundation__inner {
+    .audit-section__grid {
       grid-template-columns: 1fr;
       align-items: start;
     }

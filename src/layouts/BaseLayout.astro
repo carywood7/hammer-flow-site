@@ -15,11 +15,13 @@ import { site } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
+  robots?: string;
 }
 
 const {
   title = site.title,
   description = site.description,
+  robots = "index,follow",
 } = Astro.props;
 ---
 
@@ -28,6 +30,7 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#090d10" />
@@ -37,7 +40,7 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
@@ -47,6 +50,8 @@ const {
   </head>
 
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
     <slot />
   </body>
 </html>
