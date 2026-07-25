@@ -1,0 +1,282 @@
+<div class="system-panel" aria-label="Example MSP automation architecture">
+  <div class="system-panel__header">
+    <div>
+      <span class="system-panel__label">Reference architecture</span>
+      <strong>Read-only recommendation flow</strong>
+    </div>
+
+    <span class="system-panel__status">
+      <i></i>
+      Validated
+    </span>
+  </div>
+
+  <div class="system-panel__canvas">
+    <div class="system-node system-node--source">
+      <span>01 / Inputs</span>
+      <strong>PSA + RMM events</strong>
+      <small>Tickets · alerts · users</small>
+    </div>
+
+    <span class="system-connector system-connector--one" aria-hidden="true"></span>
+
+    <div class="system-node system-node--rules">
+      <span>02 / Rules</span>
+      <strong>Deterministic logic</strong>
+      <small>Thresholds · routing · validation</small>
+    </div>
+
+    <span class="system-connector system-connector--two" aria-hidden="true"></span>
+
+    <div class="system-node system-node--review">
+      <span>03 / Control</span>
+      <strong>Human review</strong>
+      <small>Approve · amend · reject</small>
+    </div>
+
+    <span class="system-connector system-connector--three" aria-hidden="true"></span>
+
+    <div class="system-node system-node--output">
+      <span>04 / Output</span>
+      <strong>Recommended action</strong>
+      <small>Email · Teams · service desk</small>
+    </div>
+  </div>
+
+  <div class="system-panel__footer">
+    <span>Read-only first</span>
+    <span>Minimum permissions</span>
+    <span>Logged execution</span>
+  </div>
+</div>
+
+<style>
+  .system-panel {
+    position: relative;
+    overflow: hidden;
+    border: var(--border-strong);
+    border-radius: var(--radius-large);
+    background:
+      linear-gradient(rgba(116, 168, 200, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(116, 168, 200, 0.04) 1px, transparent 1px),
+      rgba(17, 24, 29, 0.9);
+    background-size: 2rem 2rem;
+    box-shadow: var(--shadow-panel);
+  }
+
+  .system-panel::before {
+    position: absolute;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    background: rgba(217, 145, 50, 0.08);
+    content: "";
+    filter: blur(55px);
+    inset: -5rem -4rem auto auto;
+    pointer-events: none;
+  }
+
+  .system-panel__header,
+  .system-panel__footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background: rgba(9, 13, 16, 0.5);
+  }
+
+  .system-panel__header {
+    border-bottom: var(--border-subtle);
+  }
+
+  .system-panel__header > div {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .system-panel__label,
+  .system-panel__status,
+  .system-panel__footer,
+  .system-node span,
+  .system-node small {
+    font-family: var(--font-mono);
+  }
+
+  .system-panel__label {
+    color: var(--color-steel-400);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .system-panel__header strong {
+    color: var(--color-paper-100);
+    font-size: 0.86rem;
+    font-weight: 500;
+  }
+
+  .system-panel__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-success-400);
+    font-size: 0.67rem;
+    text-transform: uppercase;
+  }
+
+  .system-panel__status i {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 0.24rem rgba(128, 185, 154, 0.11);
+  }
+
+  .system-panel__canvas {
+    position: relative;
+    min-height: 31rem;
+    padding: 2rem;
+  }
+
+  .system-node {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    width: min(14.5rem, calc(100% - 4rem));
+    gap: 0.25rem;
+    padding: 1rem;
+    border: 1px solid rgba(216, 217, 212, 0.14);
+    border-radius: var(--radius-medium);
+    background: rgba(9, 13, 16, 0.92);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .system-node span {
+    color: var(--color-signal-300);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .system-node strong {
+    color: var(--color-paper-50);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .system-node small {
+    color: var(--color-steel-400);
+    font-size: 0.62rem;
+  }
+
+  .system-node--source {
+    top: 2.75rem;
+    left: 2rem;
+  }
+
+  .system-node--rules {
+    top: 9.5rem;
+    right: 2rem;
+  }
+
+  .system-node--review {
+    bottom: 8.5rem;
+    left: 2rem;
+  }
+
+  .system-node--output {
+    right: 2rem;
+    bottom: 2.25rem;
+    border-color: rgba(217, 145, 50, 0.34);
+  }
+
+  .system-connector {
+    position: absolute;
+    z-index: 1;
+    border-style: solid;
+    border-color: rgba(116, 168, 200, 0.42);
+  }
+
+  .system-connector::after {
+    position: absolute;
+    width: 0.42rem;
+    height: 0.42rem;
+    border: 2px solid var(--color-system-400);
+    border-radius: 50%;
+    background: var(--color-ink-850);
+    content: "";
+  }
+
+  .system-connector--one {
+    top: 7rem;
+    right: 11rem;
+    left: 10rem;
+    height: 6rem;
+    border-width: 1px 1px 0 0;
+  }
+
+  .system-connector--one::after {
+    right: -0.28rem;
+    bottom: -0.22rem;
+  }
+
+  .system-connector--two {
+    top: 15rem;
+    right: 10rem;
+    bottom: 12rem;
+    left: 10rem;
+    border-width: 0 0 1px 1px;
+  }
+
+  .system-connector--two::after {
+    bottom: -0.28rem;
+    left: -0.25rem;
+  }
+
+  .system-connector--three {
+    right: 10rem;
+    bottom: 6rem;
+    left: 10rem;
+    height: 6rem;
+    border-width: 0 1px 1px 0;
+  }
+
+  .system-connector--three::after {
+    right: -0.28rem;
+    top: -0.22rem;
+  }
+
+  .system-panel__footer {
+    flex-wrap: wrap;
+    border-top: var(--border-subtle);
+    color: var(--color-steel-400);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 34rem) {
+    .system-panel__canvas {
+      display: grid;
+      min-height: auto;
+      gap: 0.8rem;
+      padding: 1.2rem;
+    }
+
+    .system-node {
+      position: static;
+      width: 100%;
+    }
+
+    .system-connector {
+      display: none;
+    }
+
+    .system-panel__footer {
+      display: grid;
+    }
+  }
+</style>

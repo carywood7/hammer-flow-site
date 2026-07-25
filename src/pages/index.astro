@@ -1,83 +1,340 @@
 ---
-const pageTitle = "Hammer Flow | MSP Automation Services";
-const pageDescription =
-  "Hammer Flow designs, implements, integrates, and manages workflow automation for managed service providers.";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SystemDiagram from "../components/SystemDiagram.astro";
+
+const proofPoints = [
+  "5 validated reference workflows",
+  "Deterministic business rules",
+  "Read-only-first delivery",
+  "Human-review safeguards",
+  "Client-owned infrastructure",
+];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={pageDescription} />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{pageTitle}</title>
-  </head>
+<BaseLayout>
+  <SiteHeader />
 
-  <body>
-    <main>
-      <p class="eyebrow">Hammer Flow</p>
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">MSP automation services</p>
 
-      <h1>MSP automation website foundation</h1>
+          <h1>
+            Automation built around the way your MSP
+            <em>actually operates.</em>
+          </h1>
 
-      <p class="intro">
-        The technical foundation is ready. The complete service-led Hammer Flow
-        website will be developed through the next design and content sprints.
-      </p>
-    </main>
-  </body>
-</html>
+          <p class="hero__summary">
+            Hammer Flow audits, designs, implements, integrates, and manages
+            workflow automation across MSP service desks, PSA and RMM systems,
+            Microsoft 365, onboarding operations, and internal processes.
+          </p>
+
+          <div class="hero__actions">
+            <ButtonLink
+              href="#audit"
+              label="Request an Automation Audit"
+            />
+
+            <ButtonLink
+              href="#workflows"
+              label="Explore Workflow Examples"
+              variant="secondary"
+            />
+          </div>
+
+          <dl class="hero__principles">
+            <div>
+              <dt>01</dt>
+              <dd>Service-led and tool-agnostic</dd>
+            </div>
+
+            <div>
+              <dt>02</dt>
+              <dd>Read-only before write access</dd>
+            </div>
+
+            <div>
+              <dt>03</dt>
+              <dd>Human control where it matters</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero__visual">
+          <SystemDiagram />
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="Hammer Flow delivery principles">
+      <div class="container proof__grid">
+        {
+          proofPoints.map((point, index) => (
+            <div class="proof__item">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{point}</strong>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="workflows" class="foundation-section section">
+      <div class="container container--narrow">
+        <p class="eyebrow">Validated reference systems</p>
+
+        <h2 class="section-title">
+          Five workflows designed around real MSP operating pressure.
+        </h2>
+
+        <p class="section-copy">
+          The next Sprint 1 batches will add the complete workflow portfolio,
+          services, delivery approach, governance model, integration ecosystem,
+          and automation-audit conversion section.
+        </p>
+      </div>
+    </section>
+
+    <section id="audit" class="audit-foundation">
+      <div class="container audit-foundation__inner">
+        <div>
+          <p class="eyebrow">Audit-first delivery</p>
+
+          <h2>Start with one workflow that needs to work better.</h2>
+        </div>
+
+        <p>
+          The final audit section and contact path will be implemented after the
+          complete page architecture and public contact details are confirmed.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
 
 <style>
-  :global(*) {
-    box-sizing: border-box;
+  .hero {
+    position: relative;
+    padding-block: clamp(4.5rem, 7vw, 7rem) clamp(3.75rem, 6vw, 5.5rem);
   }
 
-  :global(html) {
-    color-scheme: dark;
-    font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
-    background: #101417;
-    color: #f4f1e9;
-  }
-
-  :global(body) {
-    min-height: 100vh;
-    margin: 0;
+  .hero__grid {
     display: grid;
-    place-items: center;
+    grid-template-columns: minmax(0, 1.02fr) minmax(26rem, 0.98fr);
+    align-items: start;
+    gap: clamp(3rem, 6vw, 6.5rem);
   }
 
-  main {
-    width: min(42rem, calc(100% - 3rem));
-    padding: 4rem 0;
+  .hero__content {
+    position: relative;
+    z-index: 2;
   }
 
-  .eyebrow {
-    margin: 0 0 1rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #e6a447;
-  }
-
-  h1 {
+  .hero h1 {
     max-width: 12ch;
-    margin: 0;
-    font-size: clamp(2.75rem, 8vw, 5.5rem);
-    line-height: 0.96;
-    letter-spacing: -0.055em;
+    margin-bottom: var(--space-6);
+    color: var(--color-paper-50);
+    font-size: clamp(3.35rem, 6vw, 6rem);
+    font-weight: 500;
+    letter-spacing: -0.058em;
+    line-height: 0.93;
   }
 
-  .intro {
-    max-width: 37rem;
-    margin: 1.75rem 0 0;
-    color: #aeb7bd;
-    font-size: 1.05rem;
-    line-height: 1.7;
+  .hero h1 em {
+    display: block;
+    color: var(--color-steel-400);
+    font-style: normal;
+  }
+
+  .hero__summary {
+    max-width: 40rem;
+    margin-bottom: var(--space-6);
+    color: var(--color-steel-300);
+    font-size: clamp(1.05rem, 2vw, 1.24rem);
+    line-height: 1.72;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: var(--space-7);
+  }
+
+  .hero__principles {
+    display: grid;
+    max-width: 45rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding-top: var(--space-5);
+    border-top: var(--border-subtle);
+  }
+
+  .hero__principles div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  .hero__principles dt {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  .hero__principles dd {
+    margin: 0;
+    color: var(--color-steel-400);
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .hero__visual {
+    min-width: 0;
+    padding-top: clamp(4rem, 8vw, 7.25rem);
+  }
+
+  .proof {
+    border-block: var(--border-subtle);
+    background: rgba(13, 18, 22, 0.78);
+  }
+
+  .proof__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .proof__item {
+    display: grid;
+    min-height: 7.25rem;
+    align-content: center;
+    gap: 0.45rem;
+    padding: 1.2rem;
+    border-right: var(--border-subtle);
+  }
+
+  .proof__item:first-child {
+    border-left: var(--border-subtle);
+  }
+
+  .proof__item span {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+  }
+
+  .proof__item strong {
+    color: var(--color-paper-200);
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .foundation-section {
+    min-height: 43rem;
+    display: grid;
+    align-items: center;
+  }
+
+  .audit-foundation {
+    padding-block: var(--space-9);
+    border-top: var(--border-subtle);
+    background: var(--color-paper-100);
+    color: var(--color-ink-950);
+  }
+
+  .audit-foundation__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+    align-items: end;
+    gap: var(--space-8);
+  }
+
+  .audit-foundation :global(.eyebrow) {
+    color: #9b5f17;
+  }
+
+  .audit-foundation h2 {
+    max-width: 14ch;
+    margin: 0;
+    color: var(--color-ink-950);
+    font-size: clamp(2.5rem, 5vw, 4.75rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .audit-foundation p:last-child {
+    max-width: 31rem;
+    margin: 0;
+    color: #4e5c64;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 66rem) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__content {
+      max-width: 52rem;
+    }
+
+    .hero__visual {
+      max-width: 46rem;
+      padding-top: 0;
+    }
+
+    .proof__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .proof__item:nth-child(3) {
+      border-right: none;
+    }
+
+    .proof__item:nth-child(n + 4) {
+      border-top: var(--border-subtle);
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .hero {
+      padding-top: 3.75rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.15rem, 14vw, 4.8rem);
+    }
+
+    .hero__principles {
+      grid-template-columns: 1fr;
+    }
+
+    .proof__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proof__item,
+    .proof__item:first-child,
+    .proof__item:nth-child(3) {
+      border-right: var(--border-subtle);
+      border-left: var(--border-subtle);
+    }
+
+    .proof__item + .proof__item {
+      border-top: var(--border-subtle);
+    }
+
+    .audit-foundation__inner {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
   }
 </style>

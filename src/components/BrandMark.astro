@@ -1,0 +1,84 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<a class:list={["brand", { "brand--compact": compact }]} href="/" aria-label="Hammer Flow home">
+  <svg
+    class="brand__symbol"
+    viewBox="0 0 42 42"
+    role="img"
+    aria-label="Hammer Flow mark"
+  >
+    <rect class="brand__frame" x="0.75" y="0.75" width="40.5" height="40.5" rx="8"></rect>
+    <path class="brand__path" d="M12 11v20M30 11v20M12 21h18"></path>
+    <circle class="brand__node" cx="30" cy="21" r="2.75"></circle>
+  </svg>
+
+  <span class="brand__copy">
+    <strong>Hammer Flow</strong>
+    <small>MSP Automation</small>
+  </span>
+</a>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: max-content;
+  }
+
+  .brand__symbol {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .brand__frame {
+    fill: var(--color-ink-850);
+    stroke: rgba(216, 217, 212, 0.2);
+    stroke-width: 1.5;
+  }
+
+  .brand__path {
+    fill: none;
+    stroke: var(--color-signal-400);
+    stroke-linecap: square;
+    stroke-width: 3;
+  }
+
+  .brand__node {
+    fill: var(--color-paper-50);
+  }
+
+  .brand__copy {
+    display: grid;
+    gap: 0.05rem;
+  }
+
+  .brand__copy strong {
+    color: var(--color-paper-50);
+    font-size: 0.93rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .brand__copy small {
+    color: var(--color-steel-400);
+    font-family: var(--font-mono);
+    font-size: 0.59rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .brand--compact .brand__copy {
+    display: none;
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import BrandMark from "./BrandMark.astro";
+import ButtonLink from "./ButtonLink.astro";
+import { site } from "../data/site";
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <BrandMark />
+
+    <nav class="site-header__navigation" aria-label="Primary navigation">
+      {
+        site.navigation.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))
+      }
+    </nav>
+
+    <div class="site-header__action">
+      <ButtonLink
+        href="#audit"
+        label="Request an Audit"
+        variant="secondary"
+      />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 20;
+    border-bottom: var(--border-subtle);
+    background: rgba(9, 13, 16, 0.72);
+    backdrop-filter: blur(18px);
+  }
+
+  .site-header__inner {
+    display: grid;
+    min-height: 5.25rem;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .site-header__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 2.2vw, 2rem);
+  }
+
+  .site-header__navigation a {
+    color: var(--color-steel-300);
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+  }
+
+  .site-header__navigation a:hover {
+    color: var(--color-paper-50);
+  }
+
+  .site-header__action :global(.button) {
+    min-height: 2.7rem;
+    padding-block: 0.65rem;
+    font-size: 0.76rem;
+  }
+
+  @media (max-width: 68rem) {
+    .site-header__navigation {
+      display: none;
+    }
+
+    .site-header__inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .site-header__action {
+      display: none;
+    }
+
+    .site-header__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
