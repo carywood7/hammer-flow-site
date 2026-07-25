@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtonLink from "../components/ButtonLink.astro";
+import DeliveryStage from "../components/DeliveryStage.astro";
+import IntegrationCard from "../components/IntegrationCard.astro";
 import ProblemCard from "../components/ProblemCard.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -11,6 +13,12 @@ import {
   referenceWorkflows,
   workflowControls,
 } from "../data/workflows";
+import {
+  deliveryStages,
+  integrationCategories,
+  reasonsToWorkTogether,
+  safetyControls,
+} from "../data/delivery";
 
 const proofPoints = [
   "5 validated reference workflows",
@@ -213,6 +221,124 @@ const proofPoints = [
                 outcome={workflow.outcome}
                 control={workflow.control}
               />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="approach-section section">
+      <div class="container">
+        <div class="approach-section__intro">
+          <div>
+            <p class="eyebrow">Delivery approach</p>
+
+            <h2 class="section-title">
+              A safer path from manual work to managed automation.
+            </h2>
+          </div>
+
+          <p class="section-copy">
+            Hammer Flow begins with the process and its operating risk. Tool
+            selection, implementation, access, and production rollout follow
+            only after the workflow is understood and review controls are clear.
+          </p>
+        </div>
+
+        <div class="approach-section__stages">
+          {
+            deliveryStages.map((stage) => (
+              <DeliveryStage
+                number={stage.number}
+                title={stage.title}
+                copy={stage.copy}
+                outcome={stage.outcome}
+              />
+            ))
+          }
+        </div>
+
+        <div class="approach-section__controls">
+          <div>
+            <p class="eyebrow">Safety standard</p>
+
+            <h3>Control is part of the implementation—not an afterthought.</h3>
+          </div>
+
+          <ul>
+            {
+              safetyControls.map((control, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{control}</strong>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="integrations" class="integrations-section">
+      <div class="container integrations-section__shell">
+        <div class="integrations-section__intro">
+          <div>
+            <p class="eyebrow">Tools and integrations</p>
+
+            <h2>
+              Work with the systems your MSP already depends on.
+            </h2>
+          </div>
+
+          <p>
+            Hammer Flow is tool-agnostic. The implementation stack is selected
+            around the workflow, API capabilities, permissions, maintainability,
+            and the client's existing technical environment.
+          </p>
+        </div>
+
+        <div class="integrations-section__grid">
+          {
+            integrationCategories.map((integration) => (
+              <IntegrationCard
+                label={integration.label}
+                title={integration.title}
+                copy={integration.copy}
+                examples={integration.examples}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="why-hammer-flow" class="why-section section">
+      <div class="container why-section__grid">
+        <div class="why-section__intro">
+          <p class="eyebrow">Why Hammer Flow</p>
+
+          <h2 class="section-title">
+            Implementation expertise without another platform to manage.
+          </h2>
+
+          <p class="section-copy">
+            Hammer Flow is designed for MSPs that want practical automation
+            outcomes while keeping ownership of their systems, infrastructure,
+            operating rules, and production access.
+          </p>
+        </div>
+
+        <div class="why-section__reasons">
+          {
+            reasonsToWorkTogether.map((reason, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+
+                <div>
+                  <h3>{reason.title}</h3>
+                  <p>{reason.copy}</p>
+                </div>
+              </article>
             ))
           }
         </div>
@@ -515,6 +641,189 @@ const proofPoints = [
     border-inline: var(--border-subtle);
   }
 
+  .approach-section {
+    border-top: var(--border-subtle);
+  }
+
+  .approach-section__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.7fr);
+    align-items: end;
+    gap: var(--space-8);
+    margin-bottom: var(--space-7);
+  }
+
+  .approach-section__intro .section-title,
+  .approach-section__intro .section-copy {
+    margin-bottom: 0;
+  }
+
+  .approach-section__stages {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .approach-section__controls {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.75fr) minmax(0, 1.25fr);
+    gap: var(--space-7);
+    margin-top: var(--space-7);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: var(--border-subtle);
+    background: rgba(116, 168, 200, 0.035);
+  }
+
+  .approach-section__controls h3 {
+    max-width: 18ch;
+    margin: 0;
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+  }
+
+  .approach-section__controls ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .approach-section__controls li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    align-items: start;
+    padding: 0.9rem;
+    border-top: var(--border-subtle);
+  }
+
+  .approach-section__controls li:nth-child(odd) {
+    border-right: var(--border-subtle);
+  }
+
+  .approach-section__controls li:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .approach-section__controls li span {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+  }
+
+  .approach-section__controls li strong {
+    color: var(--color-paper-200);
+    font-size: 0.73rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .integrations-section {
+    background: var(--color-paper-100);
+    color: var(--color-ink-950);
+  }
+
+  .integrations-section__shell {
+    border-inline: 1px solid rgba(9, 13, 16, 0.14);
+  }
+
+  .integrations-section__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.7fr);
+    align-items: end;
+    gap: var(--space-7);
+    padding: clamp(3rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .integrations-section :global(.eyebrow) {
+    color: #9b5f17;
+  }
+
+  .integrations-section__intro h2 {
+    max-width: 17ch;
+    margin: 0;
+    color: var(--color-ink-950);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.25vw, 3.1rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.03;
+  }
+
+  .integrations-section__intro > p {
+    max-width: 32rem;
+    margin: 0;
+    color: #53616a;
+    font-size: 0.95rem;
+    line-height: 1.68;
+  }
+
+  .integrations-section__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .why-section {
+    border-top: var(--border-subtle);
+  }
+
+  .why-section__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .why-section__intro {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .why-section__intro .section-title {
+    max-width: 16ch;
+  }
+
+  .why-section__reasons {
+    border-top: var(--border-subtle);
+  }
+
+  .why-section__reasons article {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 1.35rem 0;
+    border-bottom: var(--border-subtle);
+  }
+
+  .why-section__reasons article > span {
+    padding-top: 0.2rem;
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+  }
+
+  .why-section__reasons h3 {
+    margin-bottom: 0.45rem;
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.6vw, 1.42rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .why-section__reasons p {
+    max-width: 37rem;
+    margin: 0;
+    color: var(--color-steel-300);
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
   .audit-foundation {
     padding-block: var(--space-9);
     border-top: var(--border-subtle);
@@ -558,9 +867,24 @@ const proofPoints = [
 
     .problems__intro,
     .services-section__intro,
-    .workflow-showcase__intro {
+    .workflow-showcase__intro,
+    .approach-section__intro,
+    .integrations-section__intro,
+    .why-section__grid {
       grid-template-columns: 1fr;
       align-items: start;
+    }
+
+    .approach-section__stages {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .integrations-section__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .why-section__intro {
+      position: static;
     }
 
     .workflow-showcase__controls {
@@ -604,8 +928,23 @@ const proofPoints = [
 
     .problems__grid,
     .services-section__grid,
-    .workflow-showcase__controls {
+    .workflow-showcase__controls,
+    .approach-section__stages,
+    .approach-section__controls,
+    .approach-section__controls ul,
+    .integrations-section__grid {
       grid-template-columns: 1fr;
+    }
+
+    .approach-section__controls li,
+    .approach-section__controls li:nth-child(odd),
+    .approach-section__controls li:nth-child(-n + 2) {
+      border-right: 0;
+      border-top: var(--border-subtle);
+    }
+
+    .approach-section__controls li:first-child {
+      border-top: 0;
     }
 
     .workflow-showcase__controls div,
