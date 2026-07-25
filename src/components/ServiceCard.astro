@@ -1,0 +1,114 @@
+---
+interface Props {
+  index: number;
+  title: string;
+  copy: string;
+  outcome: string;
+}
+
+const { index, title, copy, outcome } = Astro.props;
+const number = String(index).padStart(2, "0");
+---
+
+<article class="service-card">
+  <header>
+    <span>{number}</span>
+    <i aria-hidden="true"></i>
+  </header>
+
+  <h3>{title}</h3>
+  <p>{copy}</p>
+
+  <footer>
+    <small>Delivery outcome</small>
+    <strong>{outcome}</strong>
+  </footer>
+</article>
+
+<style>
+  .service-card {
+    display: flex;
+    min-height: 19.5rem;
+    flex-direction: column;
+    padding: clamp(1.35rem, 2.4vw, 1.75rem);
+    border: var(--border-subtle);
+    background:
+      linear-gradient(
+        145deg,
+        rgba(116, 168, 200, 0.035),
+        transparent 52%
+      ),
+      rgba(17, 24, 29, 0.62);
+    transition:
+      border-color var(--transition-medium),
+      transform var(--transition-medium),
+      background-color var(--transition-medium);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(216, 217, 212, 0.24);
+    background-color: rgba(23, 32, 39, 0.82);
+  }
+
+  .service-card header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+
+  .service-card header span {
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+  }
+
+  .service-card header i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-system-400);
+    box-shadow: 0 0 0 0.3rem rgba(116, 168, 200, 0.08);
+  }
+
+  .service-card h3 {
+    max-width: 12ch;
+    margin-bottom: var(--space-4);
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .service-card > p {
+    margin-bottom: var(--space-5);
+    color: var(--color-steel-300);
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
+  .service-card footer {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: var(--border-subtle);
+  }
+
+  .service-card footer small {
+    color: var(--color-steel-500);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .service-card footer strong {
+    color: var(--color-paper-200);
+    font-size: 0.76rem;
+    font-weight: 500;
+  }
+</style>

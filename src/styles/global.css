@@ -19,6 +19,7 @@
   --color-success-400: #80b99a;
 
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --container: 76rem;
@@ -32,9 +33,9 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 2.75rem;
-  --space-8: 3.75rem;
-  --space-9: 5rem;
-  --space-10: 7rem;
+  --space-8: 3.25rem;
+  --space-9: 4.25rem;
+  --space-10: 5.5rem;
 
   --radius-small: 0.45rem;
   --radius-medium: 0.8rem;
@@ -184,13 +185,14 @@ p {
 }
 
 .section-title {
-  max-width: 16ch;
+  max-width: 18ch;
   margin-bottom: var(--space-5);
   color: var(--color-paper-50);
-  font-size: clamp(2.25rem, 5vw, 4.25rem);
-  font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.7vw, 3.35rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
 }
 
 .section-copy {
@@ -213,7 +215,7 @@ p {
 
 @media (max-width: 48rem) {
   :root {
-    --space-10: 5rem;
+    --space-10: 4.25rem;
   }
 
   body {

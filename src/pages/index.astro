@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtonLink from "../components/ButtonLink.astro";
+import ProblemCard from "../components/ProblemCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SystemDiagram from "../components/SystemDiagram.astro";
+import { operationalProblems, services } from "../data/company";
 
 const proofPoints = [
   "5 validated reference workflows",
@@ -20,28 +23,32 @@ const proofPoints = [
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__content">
-          <p class="eyebrow">MSP automation services</p>
+          <p class="eyebrow">MSP automation implementation</p>
 
           <h1>
-            Automation built around the way your MSP
-            <em>actually operates.</em>
+            Automation engineered
+            <em>around your MSP.</em>
           </h1>
 
           <p class="hero__summary">
-            Hammer Flow audits, designs, implements, integrates, and manages
-            workflow automation across MSP service desks, PSA and RMM systems,
-            Microsoft 365, onboarding operations, and internal processes.
+            Hammer Flow audits, designs, integrates, and manages operational
+            workflows across PSA, RMM, Microsoft 365, onboarding, and service
+            operations—without forcing your team into another platform.
+          </p>
+
+          <p class="hero__positioning">
+            Service-led. Tool-agnostic. Built for controlled rollout.
           </p>
 
           <div class="hero__actions">
             <ButtonLink
               href="#audit"
-              label="Request an Automation Audit"
+              label="Request an Audit"
             />
 
             <ButtonLink
               href="#workflows"
-              label="Explore Workflow Examples"
+              label="View Workflow Examples"
               variant="secondary"
             />
           </div>
@@ -83,6 +90,71 @@ const proofPoints = [
       </div>
     </section>
 
+    <section class="problems">
+      <div class="container problems__shell">
+        <div class="problems__intro">
+          <div>
+            <p class="eyebrow">Operational pressure</p>
+
+            <h2>
+              The work MSP teams repeat, chase, and discover too late.
+            </h2>
+          </div>
+
+          <p>
+            Hammer Flow starts with the operating problem—not a preferred
+            platform. The aim is to remove avoidable manual effort while
+            preserving control, accountability, and service context.
+          </p>
+        </div>
+
+        <div class="problems__grid">
+          {
+            operationalProblems.map((problem, index) => (
+              <ProblemCard
+                index={index + 1}
+                title={problem.title}
+                copy={problem.copy}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services-section section">
+      <div class="container">
+        <div class="services-section__intro">
+          <div>
+            <p class="eyebrow">Automation services</p>
+
+            <h2 class="section-title">
+              From workflow audit to managed operation.
+            </h2>
+          </div>
+
+          <p class="section-copy">
+            Hammer Flow provides implementation expertise around the systems
+            the MSP already uses. There is no requirement to replace the PSA,
+            RMM, workflow engine, or Microsoft environment.
+          </p>
+        </div>
+
+        <div class="services-section__grid">
+          {
+            services.map((service, index) => (
+              <ServiceCard
+                index={index + 1}
+                title={service.title}
+                copy={service.copy}
+                outcome={service.outcome}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section id="workflows" class="foundation-section section">
       <div class="container container--narrow">
         <p class="eyebrow">Validated reference systems</p>
@@ -92,9 +164,9 @@ const proofPoints = [
         </h2>
 
         <p class="section-copy">
-          The next Sprint 1 batches will add the complete workflow portfolio,
-          services, delivery approach, governance model, integration ecosystem,
-          and automation-audit conversion section.
+          The next build stage will present each validated workflow through its
+          business problem, deterministic decision logic, human-review control,
+          and operational output.
         </p>
       </div>
     </section>
@@ -119,14 +191,14 @@ const proofPoints = [
 <style>
   .hero {
     position: relative;
-    padding-block: clamp(4.5rem, 7vw, 7rem) clamp(3.75rem, 6vw, 5.5rem);
+    padding-block: clamp(3.25rem, 4.5vw, 4.75rem) clamp(2.75rem, 4vw, 3.75rem);
   }
 
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.02fr) minmax(26rem, 0.98fr);
-    align-items: start;
-    gap: clamp(3rem, 6vw, 6.5rem);
+    grid-template-columns: minmax(0, 0.92fr) minmax(28rem, 1.08fr);
+    align-items: center;
+    gap: clamp(3rem, 5.5vw, 6rem);
   }
 
   .hero__content {
@@ -135,34 +207,46 @@ const proofPoints = [
   }
 
   .hero h1 {
-    max-width: 12ch;
-    margin-bottom: var(--space-6);
+    max-width: 11ch;
+    margin-bottom: var(--space-5);
     color: var(--color-paper-50);
-    font-size: clamp(3.35rem, 6vw, 6rem);
-    font-weight: 500;
-    letter-spacing: -0.058em;
-    line-height: 0.93;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 4.7vw, 4.55rem);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    line-height: 0.97;
   }
 
   .hero h1 em {
     display: block;
-    color: var(--color-steel-400);
+    color: var(--color-signal-300);
     font-style: normal;
   }
 
   .hero__summary {
-    max-width: 40rem;
-    margin-bottom: var(--space-6);
+    max-width: 38rem;
+    margin-bottom: var(--space-4);
     color: var(--color-steel-300);
-    font-size: clamp(1.05rem, 2vw, 1.24rem);
-    line-height: 1.72;
+    font-size: clamp(1rem, 1.55vw, 1.12rem);
+    line-height: 1.68;
+  }
+
+  .hero__positioning {
+    margin-bottom: var(--space-5);
+    color: var(--color-paper-200);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-bottom: var(--space-7);
+    margin-bottom: var(--space-6);
   }
 
   .hero__principles {
@@ -197,7 +281,8 @@ const proofPoints = [
 
   .hero__visual {
     min-width: 0;
-    padding-top: clamp(4rem, 8vw, 7.25rem);
+    max-width: 41rem;
+    margin-left: auto;
   }
 
   .proof {
@@ -236,10 +321,74 @@ const proofPoints = [
     line-height: 1.45;
   }
 
+  .problems {
+    background: var(--color-paper-100);
+    color: var(--color-ink-950);
+  }
+
+  .problems__shell {
+    border-inline: 1px solid rgba(9, 13, 16, 0.14);
+  }
+
+  .problems__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.7fr);
+    align-items: end;
+    gap: var(--space-7);
+    padding: clamp(2.75rem, 4vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .problems :global(.eyebrow) {
+    color: #9b5f17;
+  }
+
+  .problems__intro h2 {
+    max-width: 17ch;
+    margin: 0;
+    color: var(--color-ink-950);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.25vw, 3.1rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.03;
+  }
+
+  .problems__intro > p {
+    max-width: 32rem;
+    margin: 0;
+    color: #53616a;
+    font-size: 0.96rem;
+    line-height: 1.68;
+  }
+
+  .problems__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-section__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.7fr);
+    align-items: end;
+    gap: var(--space-8);
+    margin-bottom: var(--space-6);
+  }
+
+  .services-section__intro .section-title,
+  .services-section__intro .section-copy {
+    margin-bottom: 0;
+  }
+
+  .services-section__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .foundation-section {
-    min-height: 43rem;
+    min-height: 29rem;
     display: grid;
     align-items: center;
+    border-top: var(--border-subtle);
   }
 
   .audit-foundation {
@@ -264,10 +413,11 @@ const proofPoints = [
     max-width: 14ch;
     margin: 0;
     color: var(--color-ink-950);
-    font-size: clamp(2.5rem, 5vw, 4.75rem);
-    font-weight: 500;
-    letter-spacing: -0.05em;
-    line-height: 1;
+    font-family: var(--font-display);
+    font-size: clamp(2.15rem, 3.6vw, 3.45rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.03;
   }
 
   .audit-foundation p:last-child {
@@ -280,6 +430,16 @@ const proofPoints = [
   @media (max-width: 66rem) {
     .hero__grid {
       grid-template-columns: 1fr;
+    }
+
+    .problems__intro,
+    .services-section__intro {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .services-section__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .hero__content {
@@ -309,8 +469,17 @@ const proofPoints = [
       padding-top: 3.75rem;
     }
 
+    .problems__grid,
+    .services-section__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .problems__intro {
+      padding-inline: 1.25rem;
+    }
+
     .hero h1 {
-      font-size: clamp(3.15rem, 14vw, 4.8rem);
+      font-size: clamp(2.8rem, 12vw, 4.1rem);
     }
 
     .hero__principles {
