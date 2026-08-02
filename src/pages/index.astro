@@ -14,6 +14,7 @@ import { operationalProblems, services } from "../data/company";
 import {
   referenceWorkflows,
   workflowControls,
+  workflowGroups,
 } from "../data/workflows";
 import {
   deliveryStages,
@@ -23,12 +24,19 @@ import {
 } from "../data/delivery";
 
 const proofPoints = [
-  "5 validated reference workflows",
+  "15 validated reference workflows",
+  "Five MSP operating areas",
   "Deterministic business rules",
   "Read-only-first delivery",
   "Human-review safeguards",
-  "Client-owned infrastructure",
 ];
+
+const groupedWorkflows = workflowGroups.map((group) => ({
+  ...group,
+  workflows: referenceWorkflows.filter(
+    (workflow) => workflow.group === group.id,
+  ),
+}));
 ---
 
 <BaseLayout>
@@ -47,8 +55,9 @@ const proofPoints = [
 
           <p class="hero__summary">
             Hammer Flow audits, designs, integrates, and manages operational
-            workflows across PSA, RMM, Microsoft 365, onboarding, and service
-            operations—without forcing your team into another platform.
+            workflows across service delivery, identity, security, governance,
+            profitability, and endpoint protection—without forcing your team
+            into another platform.
           </p>
 
           <p class="hero__positioning">
@@ -177,22 +186,34 @@ const proofPoints = [
             <p class="eyebrow">Validated workflow examples</p>
 
             <h2 class="section-title">
-              Five separate systems. One controlled delivery standard.
+              Fifteen workflows. Five operating areas. One controlled standard.
             </h2>
           </div>
 
           <div class="workflow-showcase__positioning">
             <p>
               These are public-safe local reference implementations—not
-              packaged SaaS modules. Each demonstrates how Hammer Flow turns an
-              MSP operating problem into deterministic logic, a reviewable
-              output, and a safer production implementation plan.
+              packaged SaaS modules or active client deployments. Each shows how
+              Hammer Flow turns an MSP operating problem into deterministic
+              logic, a reviewable output, and a safer production implementation
+              plan.
             </p>
 
             <small>
               Current reference state: synthetic data, inactive sanitized
-              exports, local delivery, and no production write access.
+              exports, repeatable validation, and no production write access.
             </small>
+
+            <div class="workflow-showcase__links">
+              <a
+                href="https://carywood.co/hammer-flow.html#workflow-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review the complete portfolio
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -210,21 +231,110 @@ const proofPoints = [
           }
         </div>
 
-        <div class="workflow-showcase__list">
+        <div class="workflow-showcase__groups">
           {
-            referenceWorkflows.map((workflow) => (
-              <WorkflowRow
-                id={workflow.id}
-                category={workflow.category}
-                title={workflow.title}
-                purpose={workflow.purpose}
-                logic={workflow.logic}
-                proof={workflow.proof}
-                outcome={workflow.outcome}
-                control={workflow.control}
-              />
+            groupedWorkflows.map((group, groupIndex) => (
+              <section
+                id={`workflow-group-${group.id}`}
+                class="workflow-group"
+              >
+                <header class="workflow-group__header">
+                  <span>{String(groupIndex + 1).padStart(2, "0")}</span>
+
+                  <div>
+                    <p>{group.range}</p>
+                    <h3>{group.title}</h3>
+                    <small>{group.description}</small>
+                  </div>
+
+                  <strong>
+                    {group.workflows.length}
+                    {group.workflows.length === 1 ? " workflow" : " workflows"}
+                  </strong>
+                </header>
+
+                <div class="workflow-showcase__list">
+                  {
+                    group.workflows.map((workflow) => (
+                      <WorkflowRow
+                        id={workflow.id}
+                        category={workflow.category}
+                        title={workflow.title}
+                        purpose={workflow.purpose}
+                        logic={workflow.logic}
+                        proof={workflow.proof}
+                        outcome={workflow.outcome}
+                        control={workflow.control}
+                      />
+                    ))
+                  }
+                </div>
+              </section>
             ))
           }
+        </div>
+      </div>
+    </section>
+
+    <section class="margin-audit-section section">
+      <div class="container margin-audit-section__grid">
+        <div class="margin-audit-section__content">
+          <p class="eyebrow">Related diagnostic tool</p>
+
+          <h2 class="section-title">
+            Quantify the operating leak before choosing what to automate.
+          </h2>
+
+          <p class="section-copy">
+            MSP Margin Audit is a separate Rails diagnostic that estimates
+            licensing leakage, technician administration, and manual dispatch
+            cost. It creates a practical starting point for an automation
+            conversation without pretending to replace a full financial audit.
+          </p>
+
+          <div class="margin-audit-section__actions">
+            <a
+              href="https://carywood.co/msp-margin-audit.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View MSP Margin Audit
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <small>
+              Functional MVP · public deployment pending
+            </small>
+          </div>
+        </div>
+
+        <div class="margin-audit-card" aria-label="MSP Margin Audit overview">
+          <div class="margin-audit-card__header">
+            <span>Planning scorecard</span>
+            <strong>Three focused leakage areas</strong>
+          </div>
+
+          <dl>
+            <div>
+              <dt>01</dt>
+              <dd>Unbilled cloud seats</dd>
+            </div>
+
+            <div>
+              <dt>02</dt>
+              <dd>Technician administration</dd>
+            </div>
+
+            <div>
+              <dt>03</dt>
+              <dd>Manual dispatch effort</dd>
+            </div>
+          </dl>
+
+          <p>
+            Outputs include estimated monthly and annual loss, reclaimed hours,
+            potential value, ROI, payback, saved reports, and PDF scorecards.
+          </p>
         </div>
       </div>
     </section>
@@ -634,7 +744,7 @@ const proofPoints = [
 
   .workflow-showcase__controls {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     margin-bottom: var(--space-6);
     border-block: var(--border-subtle);
   }
@@ -665,8 +775,228 @@ const proofPoints = [
     line-height: 1.4;
   }
 
+  .workflow-showcase__links {
+    padding-top: 0.2rem;
+  }
+
+  .workflow-showcase__links a,
+  .margin-audit-section__actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .workflow-showcase__links a span,
+  .margin-audit-section__actions a span {
+    transition: transform 180ms ease;
+  }
+
+  .workflow-showcase__links a:hover span,
+  .margin-audit-section__actions a:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .workflow-showcase__groups {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .workflow-group {
+    scroll-margin-top: 2rem;
+  }
+
+  .workflow-group__header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1.1rem;
+    align-items: start;
+    padding: 1.15rem 1.2rem;
+    border: var(--border-subtle);
+    border-bottom: 0;
+    background: rgba(116, 168, 200, 0.035);
+  }
+
+  .workflow-group__header > span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-signal-300);
+    color: var(--color-ink-950);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    place-items: center;
+  }
+
+  .workflow-group__header p {
+    margin: 0 0 0.35rem;
+    color: var(--color-signal-300);
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .workflow-group__header h3 {
+    margin: 0 0 0.45rem;
+    color: var(--color-paper-50);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .workflow-group__header small {
+    display: block;
+    max-width: 48rem;
+    color: var(--color-steel-400);
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .workflow-group__header > strong {
+    padding-top: 0.45rem;
+    color: var(--color-paper-300);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
   .workflow-showcase__list {
     border-inline: var(--border-subtle);
+  }
+
+  .margin-audit-section {
+    border-top: var(--border-subtle);
+    background: var(--color-paper-100);
+    color: var(--color-ink-950);
+  }
+
+  .margin-audit-section__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.75fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .margin-audit-section :global(.eyebrow) {
+    color: #8a6240;
+  }
+
+  .margin-audit-section .section-title {
+    max-width: 17ch;
+    color: var(--color-ink-950);
+  }
+
+  .margin-audit-section .section-copy {
+    max-width: 43rem;
+    margin-bottom: var(--space-5);
+    color: #53616a;
+  }
+
+  .margin-audit-section__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .margin-audit-section__actions a {
+    color: #7d551d;
+  }
+
+  .margin-audit-section__actions small {
+    color: #7a858b;
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .margin-audit-card {
+    padding: clamp(1.4rem, 3vw, 2rem);
+    background: #ffffff;
+    border: 1px solid rgba(9, 13, 16, 0.14);
+    box-shadow: 0 1.6rem 4rem rgba(9, 13, 16, 0.1);
+  }
+
+  .margin-audit-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(9, 13, 16, 0.12);
+  }
+
+  .margin-audit-card__header span {
+    color: #7a858b;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .margin-audit-card__header strong {
+    max-width: 12rem;
+    color: #53616a;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .margin-audit-card dl {
+    display: grid;
+    margin: 0 0 1.25rem;
+  }
+
+  .margin-audit-card dl div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    padding-block: 0.9rem;
+    border-top: 1px solid rgba(9, 13, 16, 0.1);
+  }
+
+  .margin-audit-card dl div:first-child {
+    border-top: 0;
+  }
+
+  .margin-audit-card dt {
+    color: #9b5f17;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+
+  .margin-audit-card dd {
+    margin: 0;
+    color: #29343a;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .margin-audit-card > p {
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(9, 13, 16, 0.12);
+    color: #66737a;
+    font-size: 0.78rem;
+    line-height: 1.6;
   }
 
   .approach-section {
@@ -943,6 +1273,7 @@ const proofPoints = [
     .problems__intro,
     .services-section__intro,
     .workflow-showcase__intro,
+    .margin-audit-section__grid,
     .approach-section__intro,
     .integrations-section__intro,
     .why-section__grid {
@@ -1029,6 +1360,20 @@ const proofPoints = [
 
     .workflow-showcase__controls div + div {
       border-top: var(--border-subtle);
+    }
+
+    .workflow-group__header {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .workflow-group__header > strong {
+      grid-column: 2;
+      padding-top: 0;
+    }
+
+    .margin-audit-section__actions {
+      align-items: flex-start;
+      flex-direction: column;
     }
 
     .problems__intro {
