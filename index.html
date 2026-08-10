@@ -27,6 +27,12 @@
   
   
 
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <link rel="preconnect" href="https://assets.calendly.com">
+  <link rel="dns-prefetch" href="//assets.calendly.com">
+  <script src="https://assets.calendly.com/assets/external/widget.js"
+          type="text/javascript" defer></script>
+
 </head>
 <body>
   
@@ -86,7 +92,7 @@
 					<p class="mbr-text mbr-fonts-style mb-4 display-7">
 						Heavy-duty AI and automated workflows engineered across your entire tech ecosystem. Eliminate manual drag across your business—from Service Delivery to Sales, Finance, and HR.
 					</p>
-					<div class="mbr-section-btn mt-3"><a class="btn btn-primary-outline display-7" href="index.html#form01-8"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>5 free Workflows</a> <a class="btn btn-primary-outline display-7" href="https://calendly.com/cary-hammerflowai/msp-automation-audit"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book an Ops Audit</a></div>
+					<div class="mbr-section-btn mt-3"><a class="btn btn-primary-outline display-7" href="index.html#form01-8"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>5 free Workflows</a> <a class="btn btn-primary-outline display-7" href="https://calendly.com/cary-hammerflowai/msp-automation-audit" data-calendly-popup data-calendly-url="https://calendly.com/cary-hammerflowai/msp-automation-audit"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book an Ops Audit</a></div>
 				</div>
 			</div>
 		</div>
@@ -450,7 +456,7 @@
                     </div>
                     <div class="mbr-form form-wrap card-wrap">
 <!--Formbuilder Form-->
-<form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-verified="">
+<form action="#" method="POST" class="mbr-form form-with-styler" data-partner-calendly-form data-calendly-url="https://calendly.com/cary-hammerflowai/15-min-partner-alignment-session" data-verified="">
 <div class="row">
 
 <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12"> Oops...! some problem! </div>
@@ -657,7 +663,7 @@
 				
 				<p class="mbr-text mbr-fonts-style mb-4 display-7">
 					From niche API integrations to complex multi-app workflows—we scope, code, and deploy custom automations built exclusively for your stack.</p>
-				<div class="mbr-section-btn mt-4"><a class="btn btn-white-outline display-7" href="https://calendly.com/cary-hammerflowai/30-minute-custom-automation-meeting"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book Custom Automation Call</a></div>
+				<div class="mbr-section-btn mt-4"><a class="btn btn-white-outline display-7" href="https://calendly.com/cary-hammerflowai/30-minute-custom-automation-meeting" data-calendly-popup data-calendly-url="https://calendly.com/cary-hammerflowai/30-minute-custom-automation-meeting"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book Custom Automation Call</a></div>
 			</div>
 		</div>
 	</div>
@@ -759,7 +765,7 @@
 <div class="col-lg-6 col-md-6 col-sm-12 form-group" data-for="email">
 <input type="email" name="email" placeholder="name@companydomain.com" data-form-field="email" class="form-control display-7" value="" id="email-header02-1f">
 </div>
-<div class="col-auto mbr-section-btn"><button type="submit" class="w-100 w-100 w-100 w-100 w-100 w-100 w-100 btn btn-info-outline display-7"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Become a partner</button></div>
+<div class="col-auto mbr-section-btn"><button type="button" class="w-100 w-100 w-100 w-100 w-100 w-100 w-100 btn btn-info-outline display-7" data-partner-calendly-button><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Become a partner</button></div>
 </div>
 <span class="gdpr-block">
 <label>
@@ -979,5 +985,133 @@
   
 <input name="cookieData" type="hidden" data-cookie-cookiesAlertType='false' data-cookie-customDialogSelector='null' data-cookie-colorText='#424a4d' data-cookie-colorBg='rgb(255, 255, 255)' data-cookie-opacityOverlay='0' data-cookie-bgOpacity='100' data-cookie-textButton='GOT IT' data-cookie-rejectText='REJECT' data-cookie-colorButton='#00a896' data-cookie-rejectColor='#ffffff' data-cookie-colorLink='#424a4d' data-cookie-underlineLink='true' data-cookie-text="We use cookies to give you the best experience. Read our <a href='privacy.html'>cookie policy</a>.">
   
+
+
+
+<script data-hammerflow-calendly-init>
+document.addEventListener("DOMContentLoaded", function () {
+
+  function openCalendly(url) {
+    if (!url) return;
+
+    if (
+      window.Calendly &&
+      typeof window.Calendly.initPopupWidget === "function"
+    ) {
+      window.Calendly.initPopupWidget({
+        url: url
+      });
+      return;
+    }
+
+    /*
+     * Calendly normally finishes loading before the user can click.
+     * If not, wait briefly instead of immediately opening a new tab.
+     */
+    let attempts = 0;
+
+    const waitForCalendly = setInterval(function () {
+      attempts += 1;
+
+      if (
+        window.Calendly &&
+        typeof window.Calendly.initPopupWidget === "function"
+      ) {
+        clearInterval(waitForCalendly);
+
+        window.Calendly.initPopupWidget({
+          url: url
+        });
+
+        return;
+      }
+
+      if (attempts >= 20) {
+        clearInterval(waitForCalendly);
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    }, 100);
+  }
+
+  /*
+   * Normal Calendly CTA buttons
+   */
+  document
+    .querySelectorAll("[data-calendly-popup]")
+    .forEach(function (button) {
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        openCalendly(
+          button.getAttribute("data-calendly-url")
+          || button.getAttribute("href")
+        );
+      });
+    });
+
+  /*
+   * Partner CTA
+   *
+   * We deliberately do NOT submit the Mobirise/Formoid form.
+   * We retain the email + GDPR fields only as client-side qualification
+   * before opening the Partner Alignment Calendly calendar.
+   */
+  document
+    .querySelectorAll("[data-partner-calendly-form]")
+    .forEach(function (form) {
+
+      const button =
+        form.querySelector("[data-partner-calendly-button]");
+
+      if (!button) return;
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const email =
+          form.querySelector('input[type="email"]');
+
+        const gdpr =
+          form.querySelector('input[name="gdpr"]');
+
+        if (!email || !email.value.trim()) {
+          if (email) {
+            email.setCustomValidity(
+              "Please enter your email address."
+            );
+            email.reportValidity();
+            email.setCustomValidity("");
+          }
+          return;
+        }
+
+        if (!email.checkValidity()) {
+          email.reportValidity();
+          return;
+        }
+
+        if (!gdpr || !gdpr.checked) {
+          if (gdpr) {
+            gdpr.setCustomValidity(
+              "Please agree to the Terms of Service and Privacy Policy."
+            );
+            gdpr.reportValidity();
+            gdpr.setCustomValidity("");
+          }
+          return;
+        }
+
+        openCalendly(
+          form.getAttribute("data-calendly-url")
+        );
+      });
+    });
+
+});
+</script>
+
 </body>
 </html>
