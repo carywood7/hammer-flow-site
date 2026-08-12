@@ -22,3 +22,4 @@ dist/
 npm-debug.log*
 **/.DS_Store
 *.zip
+!downloads/hammerflow-5-msp-automation-blueprints.zip
