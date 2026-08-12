@@ -462,7 +462,7 @@
                     </div>
                     <div class="mbr-form form-wrap card-wrap">
 <!--Formbuilder Form-->
-<form  class="mbr-form form-with-styler" data-verified="" method="POST" data-leadstrackr-key data-hammerflow-success-redirect="blueprints.html">
+<form  class="mbr-form form-with-styler" data-verified="" method="POST" data-leadstrackr-key data-hammerflow-success-redirect="blueprints.html" data-hammerflow-webhook="https://n8n.hammerflowai.com/webhook/hammerflow/blueprints/request" data-hammerflow-source="hammerflowai_blueprint_form">
   <input type="hidden" value="Send me the blueprints">
 <div class="row">
 
@@ -611,7 +611,7 @@
                     </div>
                     <div class="mbr-form form-wrap card-wrap">
 <!--Formbuilder Form-->
-<form class="mbr-form form-with-styler" data-verified="" method="POST" data-leadstrackr-key data-hammerflow-success-redirect="catalog.html">
+<form class="mbr-form form-with-styler" data-verified="" method="POST" data-leadstrackr-key data-hammerflow-success-redirect="catalog.html" data-hammerflow-webhook="https://n8n.hammerflowai.com/webhook/hammerflow/catalog/request" data-hammerflow-source="hammerflowai_catalog_form">
 <input type="hidden" value="Send Me The Catalog">
   <div class="row">
 
@@ -761,7 +761,7 @@
     <div class="row content-wrapper justify-content-center">
       <div class="col-lg-8 mbr-form">
 <!--Formbuilder Form-->
-<form class="mbr-form form-with-styler" data-verified=""  method="POST" data-leadstrackr-key data-hammerflow-success-redirect="partners.html">
+<form class="mbr-form form-with-styler" data-verified=""  method="POST" data-leadstrackr-key data-hammerflow-success-redirect="partners.html" data-hammerflow-webhook="https://n8n.hammerflowai.com/webhook/hammerflow/partners/request" data-hammerflow-source="hammerflowai_partner_form">
 <div class="row">
 
 <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12"> Oops...! some problem! </div>
@@ -771,7 +771,7 @@
 
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 form-group" data-for="email">
-<input type="email" name="email" placeholder="name@companydomain.com" data-form-field="email" class="form-control display-7" value="" id="email-header02-1f">
+<input type="email" name="email" placeholder="name@companydomain.com" data-form-field="email" class="form-control display-7" required="required" value="" id="email-header02-1f">
 </div>
 <div class="col-auto mbr-section-btn"><button type="submit" class="w-100 w-100 w-100 w-100 w-100 w-100 w-100 btn btn-info-outline display-7"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Become a partner</button></div>
 <input type="hidden" value="Become a partner">
@@ -1101,21 +1101,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /*
-   * Blueprint + Catalog LeadsTrackr forms.
+   * HammerFlowAI blueprint, catalog, and partner forms.
    *
-   * Block the obsolete Mobirise redirect while preserving the
-   * normal submit event for LeadsTrackr's browser-side listener.
-   *
-   * Give the tracker a short window to finish before navigating
-   * to the appropriate thank-you page.
+   * The normal submit event remains visible to LeadsTrackr.
+   * Redirect only after n8n validates the request and confirms
+   * that the transactional email request was accepted.
    */
   document
     .querySelectorAll(
-      "[data-hammerflow-success-redirect]"
+      "[data-hammerflow-success-redirect]" +
+      "[data-hammerflow-webhook]"
     )
     .forEach(function (form) {
 
-      form.addEventListener("submit", function (event) {
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         if (!form.checkValidity()) {
@@ -1128,23 +1127,94 @@ document.addEventListener("DOMContentLoaded", function () {
             "data-hammerflow-success-redirect"
           );
 
+        const webhook =
+          form.getAttribute(
+            "data-hammerflow-webhook"
+          );
+
+        const source =
+          form.getAttribute(
+            "data-hammerflow-source"
+          );
+
         const submitButton =
           form.querySelector(
             'button[type="submit"], input[type="submit"]'
           );
 
-        if (submitButton) {
-          submitButton.disabled = true;
+        const errorAlert =
+          form.querySelector(
+            "[data-form-alert-danger]"
+          );
+
+        if (errorAlert) {
+          errorAlert.hidden = true;
+          errorAlert.textContent =
+            "Oops...! Some problem occurred.";
         }
 
-        /*
-         * LeadsTrackr runs client-side. This avoids the old
-         * mobirise.com/html-builder.html navigation while giving
-         * the tracker time to capture the form event.
-         */
-        window.setTimeout(function () {
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute(
+            "aria-busy",
+            "true"
+          );
+        }
+
+        const payload = {};
+        const formData = new FormData(form);
+
+        formData.forEach(function (value, key) {
+          payload[key] = value;
+        });
+
+        payload.source = source;
+
+        try {
+          const response = await fetch(webhook, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          let result = {};
+
+          try {
+            result = await response.json();
+          } catch (jsonError) {
+            throw new Error(
+              "The automation returned an invalid response."
+            );
+          }
+
+          if (!response.ok || result.ok !== true) {
+            const firstError =
+              Array.isArray(result.errors) &&
+              result.errors.length > 0
+                ? result.errors[0].message
+                : "We could not process your request.";
+
+            throw new Error(firstError);
+          }
+
           window.location.assign(destination);
-        }, 1200);
+        } catch (error) {
+          if (errorAlert) {
+            errorAlert.textContent =
+              error.message ||
+              "We could not process your request.";
+            errorAlert.hidden = false;
+          }
+
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.removeAttribute(
+              "aria-busy"
+            );
+          }
+        }
       });
     });
 
