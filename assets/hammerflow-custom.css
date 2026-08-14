@@ -1,0 +1,30 @@
+.mbr-form .alert-danger,
+.mbr-form [data-form-alert-danger] {
+  background: #f0fbf9;
+  border: 1px solid #00a896;
+  border-left: 5px solid #00a896;
+  border-radius: 8px;
+  color: #0a2540;
+  font-family: "Google Sans", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.45;
+  padding: 1rem 1.25rem;
+}
+
+.mbr-form .alert-success,
+.mbr-form [data-form-alert] {
+  background: #f0fbf9;
+  border: 1px solid #00a896;
+  border-left: 5px solid #00a896;
+  border-radius: 8px;
+  color: #0a2540;
+  font-family: "Google Sans", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.45;
+  padding: 1rem 1.25rem;
+}
+
+.mbr-form button[disabled] {
+  cursor: wait;
+  opacity: 0.7;
+}
