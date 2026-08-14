@@ -3,9 +3,10 @@ export const site = {
   descriptor: "MSP Automation",
   title: "Hammer Flow | MSP Automation Services",
   description:
-    "Hammer Flow audits, designs, implements, integrates, and manages workflow automation for managed service providers.",
+    "Hammer Flow audits, designs, implements, integrates, and manages workflow automation for MSPs, supported by 34 validated automation blueprints.",
   url: "https://hammerflow.carywood.co",
   reviewMode: true,
+  searchIndexing: true,
   navigation: [
     { label: "Services", href: "/#services" },
     { label: "Workflow Examples", href: "/#workflows" },
