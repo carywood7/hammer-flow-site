@@ -29,7 +29,7 @@ const canonicalURL = Astro.site
   : undefined;
 
 const effectiveRobots =
-  site.reviewMode && robots === "index,follow"
+  !site.searchIndexing && robots === "index,follow"
     ? "noindex,nofollow"
     : robots;
 ---
