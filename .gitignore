@@ -1,25 +1,19 @@
-# Dependencies
-node_modules/
+# Operating system
+.DS_Store
+**/.DS_Store
 
-# Astro output
-dist/
-.astro/
+# Editors
+.vscode/
+.idea/
 
 # Environment files
 .env
 .env.*
 !.env.example
 
-# Operating system
-.DS_Store
-
-# Editors
-.vscode/
-.idea/
-
 # Logs
 *.log
-npm-debug.log*
-**/.DS_Store
+
+# Archives
 *.zip
-!downloads/hammerflow-5-msp-automation-blueprints.zip
+!downloads/*.zip
