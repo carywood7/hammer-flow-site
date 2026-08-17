@@ -132,8 +132,12 @@
       try {
         const response = await fetch(config.endpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload(form, key, config.source))
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: new URLSearchParams(
+              payload(form, key, config.source)
+            ).toString()
         });
 
         let data = null;

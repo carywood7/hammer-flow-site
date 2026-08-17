@@ -1,40 +1,39 @@
-# Hammer Flow Website
+# HammerFlowAI Website
 
-Professional service website for Hammer Flow, an MSP automation implementation
-and managed-service company.
+Production website for HammerFlowAI, built and maintained with Mobirise.
 
-## Positioning
+## Repository purpose
 
-Hammer Flow audits, designs, implements, customizes, integrates, maintains, and
-manages workflow automation for managed service providers.
+This repository contains the main public website deployed at:
 
-This repository contains the public company website. It is intentionally
-separate from:
+https://www.hammerflowai.com/
 
-- hammer-flow-automations: workflow engineering and validated prototypes
-- portfolio: Cary Wood's personal website and project case studies
+It includes:
 
-## Runtime
+- Mobirise website pages and assets
+- Five MSP Automation Blueprints landing page
+- 34-workflow Automation Catalog landing page
+- Partnership landing page
+- Privacy Policy and Terms
+- Production n8n form integrations
+- Versioned downloadable resources
+- Mobirise project source
 
-- Node.js 24.18.0
-- npm 11.16.0
-- Astro
-- TypeScript 6.0.3
-- Static output
+## Important files
 
-Select the project runtime on this machine by running:
+- `index.html` — main website
+- `project.mobirise` — editable Mobirise project
+- `assets/hammerflow-forms.js` — production n8n form integration
+- `assets/hammerflow-calendly.js` — Calendly popup integration
+- `downloads/` — downloadable Blueprint and Catalog resources
 
-    export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+## Related repositories
 
-Available commands:
+This repository is intentionally separate from:
 
-    npm install
-    npm run dev
-    npm run check
-    npm run build
-    npm run preview
+- `hammer-flow-automations` — n8n workflow engineering
+- `hammer-flow-site-portfolio` — Astro portfolio microsite
 
-## Current status
+Do not add Astro, Node.js, npm, Netlify, or GitHub Pages build files to this repository.
 
-Initial technical foundation only. Public website design and content are not yet
-complete.
+Mobirise exports may overwrite custom form integrations. Verify `assets/hammerflow-forms.js` and all production forms before deployment.
