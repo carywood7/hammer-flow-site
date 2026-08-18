@@ -24,7 +24,7 @@ It includes:
 - `index.html` — main website
 - `project.mobirise` — editable Mobirise project
 - `assets/hammerflow-forms.js` — production n8n form integration
-- `assets/hammerflow-calendly.js` — Calendly popup integration
+- `assets/hammerflow-cal.js` — Cal.com popup integration
 - `downloads/` — downloadable Blueprint and Catalog resources
 
 ## Related repositories

@@ -1,6 +1,6 @@
 # HammerFlowAI August 14, 2026 Update
 
-This package is a production-ready derivative of Prakash's `HF_website_Aug14_2026.zip` export. It preserves the supplied design and Calendly buttons while restoring the production form integrations and correcting broken local links.
+This package is a production-ready derivative of Prakash's `HF_website_Aug14_2026.zip` export. It preserves the supplied design while migrating booking buttons to Cal.com popups while restoring the production form integrations and correcting broken local links.
 
 ## Form mapping
 
@@ -47,7 +47,7 @@ Do not modify the working blueprint or partner logic unless their execution evid
 - All form consent links open `terms.html` and `Privacy-Policy.html` in a new tab.
 - Cookie and footer privacy links point to the supplied privacy page.
 
-## Calendly links preserved
+## Cal.com booking links
 
 - MSP automation audit / Quick-Win Sprint
 - 30-minute custom automation meeting
