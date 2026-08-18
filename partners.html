@@ -7,10 +7,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/hammerflowai-final-website.png" type="image/x-icon">
-  <meta name="description" content="">
+  <meta name="description" content="Partner with HammerFlowAI to scope, implement and support controlled MSP automation workflows across PSA, RMM and business systems.">
 
 
-  <title>Partnership-landing-page</title>
+  <title>MSP Automation Partner Program | HammerFlowAI</title>
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://www.hammerflowai.com/partners.html">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="HammerFlowAI"><meta property="og:title" content="MSP Automation Partner Program | HammerFlowAI"><meta property="og:description" content="Partner with HammerFlowAI to scope, implement and support controlled MSP automation workflows across PSA, RMM and business systems."><meta property="og:url" content="https://www.hammerflowai.com/partners.html"><meta property="og:image" content="https://www.hammerflowai.com/assets/images/msp-automation-guide.webp">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -27,20 +31,19 @@
 
 
 
-  <!-- HammerFlowAI Calendly preload -->
+  <!-- HammerFlowAI Cal.com preload -->
   <link rel="preconnect"
-        href="https://assets.calendly.com"
+        href="https://app.cal.com"
         crossorigin>
   <link rel="preconnect"
-        href="https://calendly.com">
+        href="https://cal.com">
   <link rel="dns-prefetch"
-        href="//assets.calendly.com">
+        href="//app.cal.com">
   <link rel="dns-prefetch"
-        href="//calendly.com">
+        href="//cal.com">
   <link rel="stylesheet"
-        href="https://assets.calendly.com/assets/external/widget.css">
-  <script src="https://assets.calendly.com/assets/external/widget.js"
-          type="text/javascript"></script>
+        href="https://app.cal.com/embed/embed.css">
+  <script src="assets/hammerflow-cal.js" defer></script>
 
 </head>
 <body>
@@ -163,7 +166,7 @@
 				<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>Want to Fast-Track Your Partnership?</strong></h1>
 
 
-				<div class="mbr-section-btn mt-4"><a class="btn btn-white-outline display-7" href="https://calendly.com/cary-hammerflowai/15-min-partner-alignment-session" data-calendly-popup data-calendly-url="https://calendly.com/cary-hammerflowai/15-min-partner-alignment-session"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book 15-Minute Partner Alignment Call</a></div>
+				<div class="mbr-section-btn mt-4"><a class="btn btn-white-outline display-7" href="https://cal.com/hammerflow/partner-alignment-call" data-cal-popup data-cal-url="https://cal.com/hammerflow/partner-alignment-call"><span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Book 15-Minute Partner Alignment Call</a></div>
 			</div>
 		</div>
 	</div>
@@ -239,7 +242,7 @@
                             <li class="item-wrap"><a href="index.html#features04-2" class="text-primary"><u>Profit Leaks</u></a></li><a href="index.html#features04-2" class="text-primary"><u>
                             </u></a><li class="item-wrap"><a href="index.html#features022-6" class="text-primary"><u>Departmental</u> <u>Matrix</u></a></li>
                             <li class="item-wrap"><a href="index.html#form01-8" class="text-primary"><u>Catalog &amp; Blueprints</u></a></li><a href="index.html#form01-8" class="text-primary"><u>
-                            </u></a><li class="item-wrap"><a href="index.html#features027-h" class="text-primary"><u>Partner Program</u></a></li><li class="item-wrap"><a href="index.html#list01-a" class="text-primary"><u>FAQ</u></a></li>
+                            </u></a><li class="item-wrap"><a href="index.html#features027-h" class="text-primary"><u>Partner Program</u></a></li><li class="item-wrap"><a href="index.html#list01-a" class="text-primary"><u>FAQ</u></a></li><li class="item-wrap"><a href="blog.html" class="text-primary"><u>MSP Automation Blogs</u></a></li>
                         </ul>
                     </div>
                     <div class="nav-wrap">
@@ -275,61 +278,6 @@
 <input name="cookieData" type="hidden" data-cookie-cookiesAlertType='false' data-cookie-customDialogSelector='null' data-cookie-colorText='#424a4d' data-cookie-colorBg='rgb(255, 255, 255)' data-cookie-opacityOverlay='0' data-cookie-bgOpacity='100' data-cookie-textButton='GOT IT' data-cookie-rejectText='REJECT' data-cookie-colorButton='#00a896' data-cookie-rejectColor='#ffffff' data-cookie-colorLink='#424a4d' data-cookie-underlineLink='true' data-cookie-text="We use cookies to give you the best experience. Read our <a href='privacy.html'>cookie policy</a>.">
 
 
-<script data-hammerflow-partners-calendly>
-document.addEventListener("DOMContentLoaded", function () {
-  document
-    .querySelectorAll("[data-calendly-popup]")
-    .forEach(function (button) {
-
-      button.addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const url =
-          button.getAttribute("data-calendly-url") ||
-          button.getAttribute("href");
-
-        if (
-          window.Calendly &&
-          typeof window.Calendly.initPopupWidget === "function"
-        ) {
-          window.Calendly.initPopupWidget({
-            url: url
-          });
-          return;
-        }
-
-        let attempts = 0;
-
-        const timer = window.setInterval(function () {
-          attempts += 1;
-
-          if (
-            window.Calendly &&
-            typeof window.Calendly.initPopupWidget === "function"
-          ) {
-            window.clearInterval(timer);
-
-            window.Calendly.initPopupWidget({
-              url: url
-            });
-
-            return;
-          }
-
-          if (attempts >= 20) {
-            window.clearInterval(timer);
-            window.open(
-              url,
-              "_blank",
-              "noopener,noreferrer"
-            );
-          }
-        }, 100);
-      });
-    });
-});
-</script>
 
 </body>
 </html>
